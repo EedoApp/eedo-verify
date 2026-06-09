@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Veilho - Email Verification</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #f2e9fb;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .card {
+      background: white;
+      border-radius: 20px;
+      padding: 40px 32px;
+      max-width: 400px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 4px 20px rgba(91,33,182,0.1);
+    }
+    .logo { color: #5B21B6; font-size: 28px; font-weight: 700; margin-bottom: 4px; }
+    .tagline { color: #999; font-size: 12px; margin-bottom: 24px; }
+    .icon { font-size: 56px; margin-bottom: 20px; }
+    h2 { color: #1a1a2e; font-size: 20px; margin-bottom: 10px; }
+    p { color: #666; font-size: 14px; line-height: 1.6; margin-bottom: 16px; }
+    .success-box {
+      background: #f0fdf4;
+      border: 1px solid #86efac;
+      border-radius: 10px;
+      padding: 12px 16px;
+      color: #16a34a;
+      font-size: 13px;
+      margin-bottom: 20px;
+    }
+    .error-box {
+      background: #fff2f2;
+      border: 1px solid #fca5a5;
+      border-radius: 10px;
+      padding: 12px 16px;
+      color: #dc2626;
+      font-size: 13px;
+      margin-bottom: 20px;
+    }
+    .hint {
+      background: #f5f0ff;
+      border-radius: 10px;
+      padding: 12px 16px;
+      color: #5B21B6;
+      font-size: 13px;
+      margin-top: 16px;
+    }
+    .open-btn {
+      display: inline-block;
+      background: #5B21B6;
+      color: white;
+      padding: 14px 36px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 12px;
+      width: 100%;
+    }
+    #success-section { display: none; }
+    #error-section { display: none; }
+    #loading-section { display: block; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="logo">Veilho</div>
+    <div class="tagline">Secure Messaging</div>
+
+    <!-- Loading -->
+    <div id="loading-section">
+      <div class="icon">⏳</div>
+      <h2>Verifying...</h2>
+      <p>Please wait while we verify your email.</p>
+    </div>
+
+    <!-- Success -->
+    <div id="success-section">
+      <div class="icon">✅</div>
+      <h2>Email Verified!</h2>
+      <div class="success-box">Your email has been verified successfully.</div>
+      <p>You can now log in to Veilho with your account.</p>
+      <a href="#" id="open-btn" class="open-btn">Open Veilho App</a>
+      <div class="hint">
+        If the app doesn't open automatically,<br>
+        please open Veilho manually.
+      </div>
+    </div>
+
+    <!-- Error -->
+    <div id="error-section">
+      <div class="icon">⚠️</div>
+      <h2 id="error-title">Verification Failed</h2>
+      <div class="error-box" id="error-msg">Something went wrong.</div>
+      <p>Open the Veilho app and tap <b>"Resend Email"</b> to get a new verification link.</p>
+      <div class="hint">Open Veilho → Email Verify Screen → Resend</div>
+    </div>
+  </div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const hash   = window.location.hash;
+
+    const error     = params.get('error');
+    const errorCode = params.get('error_code');
+    const errorDesc = params.get('error_description');
+
+    function show(id) {
+      ['loading-section','success-section','error-section'].forEach(s => {
+        document.getElementById(s).style.display = s === id ? 'block' : 'none';
+      });
+    }
+
+    if (error) {
+      // Show error
+      const isExpired = errorCode === 'otp_expired';
+      document.getElementById('error-title').innerText =
+        isExpired ? 'Link Expired' : 'Verification Failed';
+      document.getElementById('error-msg').innerText =
+        isExpired
+          ? 'This verification link has expired. Please request a new one.'
+          : (errorDesc || error).replace(/\+/g, ' ');
+      show('error-section');
+    } else {
+      // Show success and try to open app
+      show('success-section');
+      const deepLink = 'veilho://auth/callback' + hash;
+      document.getElementById('open-btn').href = deepLink;
+
+      // Auto-open app after short delay
+      setTimeout(() => {
+        window.location.href = deepLink;
+      }, 800);
+    }
+  </script>
+</body>
+</html>
