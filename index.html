@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+d<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Veilho - Email Verification</title>
+  <title>Eedo - Email Verification</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
@@ -74,7 +74,7 @@
 </head>
 <body>
   <div class="card">
-    <div class="logo">Veilho</div>
+    <div class="logo">Eedo</div>
     <div class="tagline">Secure Messaging</div>
 
     <!-- Loading -->
@@ -89,11 +89,11 @@
       <div class="icon">✅</div>
       <h2>Email Verified!</h2>
       <div class="success-box">Your email has been verified successfully.</div>
-      <p>You can now log in to Veilho with your account.</p>
-      <a href="#" id="open-btn" class="open-btn">Open Veilho App</a>
+      <p>You can now log in to Eedo with your account.</p>
+      <a href="#" id="open-btn" class="open-btn">Open Eedo App</a>
       <div class="hint">
         If the app doesn't open automatically,<br>
-        please open Veilho manually.
+        please open Eedo manually.
       </div>
     </div>
 
@@ -102,8 +102,8 @@
       <div class="icon">⚠️</div>
       <h2 id="error-title">Verification Failed</h2>
       <div class="error-box" id="error-msg">Something went wrong.</div>
-      <p>Open the Veilho app and tap <b>"Resend Email"</b> to get a new verification link.</p>
-      <div class="hint">Open Veilho → Email Verify Screen → Resend</div>
+      <p>Open the Eedo app and tap <b>"Resend Email"</b> to get a new verification link.</p>
+      <div class="hint">Open Eedo → Email Verify Screen → Resend</div>
     </div>
   </div>
 
@@ -134,7 +134,7 @@
     } else {
       // Show success and try to open app
       show('success-section');
-      const deepLink = 'veilho://auth/callback' + hash;
+      const deepLink = 'eedo://auth/callback' + hash;
       document.getElementById('open-btn').href = deepLink;
 
       // Auto-open app after short delay
