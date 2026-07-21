@@ -4,8 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Eedo - Email Verification</title>
+
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
       background: #f2e9fb;
@@ -15,6 +21,7 @@
       justify-content: center;
       padding: 20px;
     }
+
     .card {
       background: white;
       border-radius: 20px;
@@ -22,122 +29,187 @@
       max-width: 400px;
       width: 100%;
       text-align: center;
-      box-shadow: 0 4px 20px rgba(91,33,182,0.1);
+      box-shadow: 0 4px 20px rgba(91, 33, 182, 0.1);
     }
-    .logo { color: #5B21B6; font-size: 28px; font-weight: 700; margin-bottom: 4px; }
-    .tagline { color: #999; font-size: 12px; margin-bottom: 24px; }
-    .icon { font-size: 56px; margin-bottom: 20px; }
-    h2 { color: #1a1a2e; font-size: 20px; margin-bottom: 10px; }
-    p { color: #666; font-size: 14px; line-height: 1.6; margin-bottom: 16px; }
+
+    .logo {
+      color: #5B21B6;
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .tagline {
+      color: #999;
+      font-size: 12px;
+      margin-bottom: 24px;
+    }
+
+    .icon {
+      font-size: 56px;
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      color: #1a1a2e;
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+
+    p {
+      color: #666;
+      font-size: 14px;
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+
     .success-box {
-      backgroun: #f0ff4;
-      borer: 1px soli #86efac;
-      borer-raius: 10px;
-      paing: 12px 16px;
+      background: #f0fff4;
+      border: 1px solid #86efac;
+      border-radius: 10px;
+      padding: 12px 16px;
       color: #16a34a;
       font-size: 13px;
       margin-bottom: 20px;
     }
+
     .error-box {
-      backgroun: #fff2f2;
-      borer: 1px soli #fca5a5;
-      borer-raius: 10px;
-      paing: 12px 16px;
+      background: #fff2f2;
+      border: 1px solid #fca5a5;
+      border-radius: 10px;
+      padding: 12px 16px;
       color: #c2626;
       font-size: 13px;
       margin-bottom: 20px;
     }
+
     .hint {
-      backgroun: #f5f0ff;
-      borer-raius: 10px;
-      paing: 12px 16px;
+      background: #f5f0ff;
+      border-radius: 10px;
+      padding: 12px 16px;
       color: #5B21B6;
       font-size: 13px;
       margin-top: 16px;
     }
+
     .open-btn {
-      isplay: inline-block;
-      backgroun: #5B21B6;
+      display: inline-block;
+      background: #5B21B6;
       color: white;
-      paing: 14px 36px;
-      borer-raius: 12px;
-      text-ecoration: none;
+      padding: 14px 36px;
+      border-radius: 12px;
+      text-decoration: none;
       font-size: 16px;
       font-weight: 600;
       margin-bottom: 12px;
-      with: 100%;
+      width: 100%;
     }
-    #success-section { isplay: none; }
-    #error-section { isplay: none; }
-    #loaing-section { isplay: block; }
+
+    #success-section {
+      display: none;
+    }
+
+    #error-section {
+      display: none;
+    }
+
+    #loading-section {
+      display: block;
+    }
   </style>
 </head>
-<boy>
-  <iv class="car">
-    <iv class="logo">Eeo</iv>
-    <iv class="tagline">Secure Messaging</iv>
 
-    <!-- Loaing -->
-    <iv i="loaing-section">
-      <iv class="icon">⏳</iv>
+<body>
+  <div class="card">
+    <div class="logo">Eedo</div>
+    <div class="tagline">Secure Messaging</div>
+
+    <!-- Loading -->
+    <div id="loading-section">
+      <div class="icon">⏳</div>
       <h2>Verifying...</h2>
       <p>Please wait while we verify your email.</p>
-    </iv>
+    </div>
 
     <!-- Success -->
-    <iv i="success-section">
-      <iv class="icon">✅</iv>
-      <h2>Email Verifie!</h2>
-      <iv class="success-box">Your email has been verifie successfully.</iv>
-      <p>You can now log in to Eeo with your account.</p>
-      <a href="#" i="open-btn" class="open-btn">Open Eeo App</a>
-      <iv class="hint">
-        If the app oesn't open automatically,<br>
-        please open Eeo manually.
-      </iv>
-    </iv>
+    <div id="success-section">
+      <div class="icon">✅</div>
+      <h2>Email Verified!</h2>
+
+      <div class="success-box">
+        Your email has been verified successfully.
+      </div>
+
+      <p>You can now log in to Eedo with your account.</p>
+
+      <a href="#" id="open-btn" class="open-btn">
+        Open Eedo App
+      </a>
+
+      <div class="hint">
+        If the app doesn't open automatically,<br>
+        please open Eedo manually.
+      </div>
+    </div>
 
     <!-- Error -->
-    <iv i="error-section">
-      <iv class="icon">⚠️</iv>
-      <h2 i="error-title">Verification Faile</h2>
-      <iv class="error-box" i="error-msg">Something went wrong.</iv>
-      <p>Open the Eeo app an tap <b>"Resen Email"</b> to get a new verification link.</p>
-      <iv class="hint">Open Eeo → Email Verify Screen → Resen</iv>
-    </iv>
+    <div id="error-section">
+      <div class="icon">⚠️</div>
+
+      <h2 id="error-title">
+        Verification Failed
+      </h2>
+
+      <div class="error-box" id="error-msg">
+        Something went wrong.
+      </div>
+
+      <p>
+        Open the Eedo app and tap
+        <b>"Resend Email"</b>
+        to get a new verification link.
+      </p>
+
+      <div class="hint">
+        Open Eedo → Email Verify Screen → Resend
+      </div>
+    </div>
   </div>
 
   <script>
     const params = new URLSearchParams(window.location.search);
-    const hash   = window.location.hash;
+    const hash = window.location.hash;
 
-    const error     = params.get('error');
+    const error = params.get('error');
     const errorCode = params.get('error_code');
     const errorDesc = params.get('error_description');
 
     function show(id) {
-      ['loading-section','success-section','error-section'].forEach(s => {
-        document.getElementById(s).style.display = s === id ? 'block' : 'none';
+      ['loading-section', 'success-section', 'error-section'].forEach(s => {
+        document.getElementById(s).style.display =
+          s === id ? 'block' : 'none';
       });
     }
 
     if (error) {
-      // Show error
       const isExpired = errorCode === 'otp_expired';
+
       document.getElementById('error-title').innerText =
         isExpired ? 'Link Expired' : 'Verification Failed';
+
       document.getElementById('error-msg').innerText =
         isExpired
           ? 'This verification link has expired. Please request a new one.'
           : (errorDesc || error).replace(/\+/g, ' ');
+
       show('error-section');
     } else {
-      // Show success and try to open app
       show('success-section');
+
       const deepLink = 'eedo://auth/callback' + hash;
+
       document.getElementById('open-btn').href = deepLink;
 
-      // Auto-open app after short delay
       setTimeout(() => {
         window.location.href = deepLink;
       }, 800);
